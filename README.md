@@ -31,10 +31,18 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Validação de dados:** Implementação de `try-except` para capturar `ValueError`, garantindo que o sistema não encerre ao receber letras em campos numéricos ou números decimais.
 - **Fluxo inteligente:** A pergunta sobre o "Curso" é exibida exclusivamente para usuários da categoria "Aluno".
 
+### 📦 Gestão de Estoque
+- **Modelagem de lotes:** Cadastro completo contendo Nome, Preço de Compra/Venda, Quantidade e Datas (Compra/Vencimento).
+- **Lógica FIFO (First-In, First-Out):** Estrutura preparada para priorizar a venda dos itens mais velhos.
+- **Edição dinâmica:** Inplementação de método para o Administrador realizar o ajuste manual de quantidades em estoque.
+
 ## 📚 Tecnologias e conceitos aplicados
 - **Linguagem:** Python
 - **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para controle de fluxo robusto.
+- **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos (`.py`) para separação de responsabilidades entre as classes (Sistema, Usuário, Produto e Estoque).
+- **Estruturas de dados dinâmicas:** Uso de listas para armazenamento e manipulação de objetos complexos em tempo de execução.
+- **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
 - **Controle de versão:** GitHub com commits incrementais e organizados.
 
 ---
-*Status do projeto: Em desenvolvimento (identificação de usuários concluída).*
+*Status do projeto: Em desenvolvimento (identificação de usuários e gestão de estoque concluídas).*
