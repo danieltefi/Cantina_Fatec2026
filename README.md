@@ -22,19 +22,20 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 
 ## 🛠️ Funcionalidades atuais
 
-### 🔐 Painel administrativo
-- Sistema de login com validação de senha (`atletica26`).
-- Proteção contra erros de digitação e caracteres inválidos.
+### 🔐 Painel Administrativo
+- **Autenticação Segura:** Sistema de login com validação de senha (`atletica26`) e uso de atributos privados (Encapsulamento).
+- **Interface de gestão:** Menu interno que permite ao administrador navegar entre as funções de estoque sem necessidade de reautenticação.
+- **Proteção contra erros:** Uso de `try-except` para garantir que a navegação no menu não quebre com entradas inválidas.
 
-### 🛒 Painel de compras
-- Identificação de clientes por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
+### 🛒 Painel de Compras
+- **Identificação de clientes:** Coleta de dados por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
 - **Validação de dados:** Implementação de `try-except` para capturar `ValueError`, garantindo que o sistema não encerre ao receber letras em campos numéricos ou números decimais.
 - **Fluxo inteligente:** A pergunta sobre o "Curso" é exibida exclusivamente para usuários da categoria "Aluno".
 
 ### 📦 Gestão de Estoque
-- **Modelagem de lotes:** Cadastro completo contendo Nome, Preço de Compra/Venda, Quantidade e Datas (Compra/Vencimento).
-- **Lógica FIFO (First-In, First-Out):** Estrutura preparada para priorizar a venda dos itens mais velhos.
-- **Edição dinâmica:** Inplementação de método para o Administrador realizar o ajuste manual de quantidades em estoque.
+- **Cadastro de produtos:** Cadastro contendo Nome, Preço de compra/venda, Quantidade e Datas (Compra/Vencimento).
+- **Lógica FIFO (First-In, First-Out):** Estrutura que prioriza a venda dos itens mais velhos (primeiros comprados).
+- **Edição de produtos:** Implementação de método para o Administrador realizar o ajuste manual de quantidades em estoque.
 
 ## 📚 Tecnologias e conceitos aplicados
 - **Linguagem:** Python
@@ -45,4 +46,4 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Controle de versão:** GitHub com commits incrementais e organizados.
 
 ---
-*Status do projeto: Em desenvolvimento (identificação de usuários e gestão de estoque concluídas).*
+*Status do projeto: Em desenvolvimento (Identificação de usuários e gestão de estoque concluídas).*
