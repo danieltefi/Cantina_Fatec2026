@@ -9,7 +9,7 @@ class Sistema:
 # classe para guardar os dados de quem compra
 class Usuario:
     def __init__(self, nome, categoria, curso='N/A'):
-        self.nome = nome.upper()
+        self.nome = nome.capitalize()
         self.categoria = categoria
         self.curso = curso
 
@@ -36,7 +36,7 @@ def rodar_programa():
 
         elif usuario == 2:
             print('Painel de compras')
-            nome = input('Digite seu nome: ').capitalize()
+            nome = input('Digite seu nome: ')
             
             try:
                 print('1 - Aluno, 2 - Servidor, 3 - Professor')
