@@ -1,3 +1,5 @@
+from controleestoque import Produto, GerenciarEstoque
+
 # implementa a proteção da senha (Encapsulamento)
 class Sistema:
     def __init__(self):
@@ -16,26 +18,61 @@ class Usuario:
 # implementa o painel administrativo/compras
 def rodar_programa():
     sys = Sistema()
+    estoque = GerenciarEstoque() # acesso à prateleira de produtos
 
     while True:
         try: # garante que o usuario digite apenas 1 ou 2 e não quebre o codigo caso digite uma string
-            print('Cantina Atlética Fatec 2026')
-            print('1 - Administrador, 2 - Comprador')
+            print('Cantina Atlética FATEC 2026, \n1 - Administrador, \n2 - Comprador')
             usuario = int(input('Digite o número da sua opção: '))
         except ValueError:
             print('Opção inválida! Digite apenas 1 para Admin ou 2 para Comprador')
             continue # pula o codigo abaixo e volta ao while
 
         if usuario == 1:
-            print('Painel administrativo. Faça sua autenticação')
+            print('PAINEL ADMINISTRATIVO. \nFaça sua autenticação')
             senha = input('Digite sua senha: ')
+
             if sys.validar_senha(senha): # usa o método da classe para validar
                 print('Autenticação bem sucedida!')
+
+                while True: #permite cadastrar vários produtos seguidos, sem precisar precisar digitar a senha novamente
+                    print('MENU ADMINISTRADOR \n1 - Cadastrar produto, \n2 - Ver estoque, \n3 - Editar quantidade, \n0 - Sair do painel Admin')
+                    
+                    try:
+                        op_admin = int(input('Escolha uma opção: '))
+                    except ValueError:
+                        print('Inválido! Digite apenas os números.')
+                        continue
+
+                    if op_admin == 1:
+                        nome = input('Nome do produto: ')
+                        preco_compra = input('Preço de compra: ')
+                        preco_venda = input('Preço de venda: ')
+                        quantidade = input('Quantidade: ')
+                        data_compra = input('Data de compra: ')
+                        data_vencimento = input('Data de vencimento: ')
+
+                        # cria o objeto produto e adiciona ao estoque
+                        novo_p = Produto(nome, preco_compra, preco_venda, quantidade, data_compra, data_vencimento)
+                        estoque.adicionar_produto(novo_p)
+
+                    elif op_admin == 2:
+                        estoque.mostrar_estoque()
+
+                    elif op_admin == 3:
+                        nome_busca = input('Nome do produto a ser editado: ')
+                        nova_qtd = input('Nova quantidade: ')
+                        estoque.editar_quantidade(nome_busca, nova_qtd)
+
+                    elif op_admin == 0:
+                        break # Sai do menu admin e volta ao menu principal
+                    else:
+                        print('Opção inválida! Digite 0, 1, 2 ou 3')
             else:
                 print('Senha incorreta!')
 
         elif usuario == 2:
-            print('Painel de compras')
+            print('PAINEL DE COMPRAS')
             nome = input('Digite seu nome: ')
             
             try:
@@ -64,11 +101,10 @@ def rodar_programa():
                         print('Opção inválida! Digite apenas 1 para IA ou 2 para ESG')
                         continue
             
-                comprador = Usuario(nome, categoria, curso) # cria o objeto direto com os textos digitados
+                comprador = Usuario(nome, categoria, curso) # cria o objeto usuário
             
                 # mostra o resultado final
-                print(f'\nBem-vindo, {comprador.nome}!')
-                print(f'Categoria: {comprador.categoria} | Curso: {comprador.curso}')
+                print(f'Bem-vindo, {comprador.nome}!, \nCategoria: {comprador.categoria}, \nCurso: {comprador.curso}')
 
             except ValueError:
                 print('Erro: Digite apenas os números das opções!')
