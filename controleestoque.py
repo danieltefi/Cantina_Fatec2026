@@ -25,12 +25,12 @@ class GerenciarEstoque: # gerenciar estoque total
             print(f'Produto: {p.nome}, \nQtd: {p.quantidade}, \nCompra: {p.data_compra}, \nVencimento: {p.data_vencimento}')
 
     def editar_quantidade(self, nome_busca, nova_qtd): # permite editar a quantidade
-        encontrado = False
+        encontrado = False # variável de controle para verificar se o produto existe
         for p in self.lista_produtos:
             if p.nome == nome_busca.capitalize():
                 p.quantidade = int(nova_qtd)
-                encontrado = True
+                encontrado = True # se achar
                 print(f'Quantidade de {p.nome} atualizada para {nova_qtd}.')
                 break
-        if not encontrado:
+        if not encontrado: # se não achar
             print('Produto não encontrado para edição.')

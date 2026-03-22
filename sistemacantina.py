@@ -106,6 +106,26 @@ def rodar_programa():
                 # mostra o resultado final
                 print(f'Bem-vindo, {comprador.nome}!, \nCategoria: {comprador.categoria}, \nCurso: {comprador.curso}')
 
+                print('PRODUTOS DISPONÍVEIS')
+                estoque.mostrar_estoque() 
+
+                escolha = input('Digite o nome do que deseja comprar: ').capitalize()
+
+                # busca o produto na lista do estoque
+                achou = False # variável de controle para verificar se o produto existe
+                for p in estoque.lista_produtos:
+                    if p.nome == escolha:
+                        achou = True # se achar
+                        if p.quantidade > 0:
+                            print(f'O produto {p.nome} custa R$ {p.preco_venda}')
+                            # o pagamento será chamado aqui
+                        else:
+                            print(f'Desculpe, o produto {p.nome} está esgotado.')
+                        break
+                
+                if not achou: # se não achar
+                    print('Produto não encontrado.')
+
             except ValueError:
                 print('Erro: Digite apenas os números das opções!')
                 continue
