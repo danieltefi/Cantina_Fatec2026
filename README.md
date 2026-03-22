@@ -31,6 +31,8 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Identificação de clientes:** Coleta de dados por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
 - **Validação de dados:** Implementação de `try-except` para capturar `ValueError`, garantindo que o sistema não encerre ao receber letras em campos numéricos ou números decimais.
 - **Fluxo inteligente:** A pergunta sobre o "Curso" é exibida exclusivamente para usuários da categoria "Aluno".
+- **Vitrine de produtos:** Visualização dos produtos cadastrados no estoque.
+- **Busca por produto:** Lógica de busca que valida se o produto escolhido existe e se possui quantidade disponível para venda.
 
 ### 📦 Gestão de Estoque
 - **Cadastro de produtos:** Cadastro contendo Nome, Preço de compra/venda, Quantidade e Datas (Compra/Vencimento).
@@ -46,4 +48,4 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Controle de versão:** GitHub com commits incrementais e organizados.
 
 ---
-*Status do projeto: Em desenvolvimento (Identificação de usuários e gestão de estoque concluídas).*
+*Status do projeto: Em desenvolvimento (Identificação de usuários, gestão de estoque e vitrine de vendas concluídas).*
