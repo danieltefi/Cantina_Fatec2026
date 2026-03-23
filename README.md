@@ -39,13 +39,19 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Lógica FIFO (First-In, First-Out):** Estrutura que prioriza a venda dos itens mais velhos (primeiros comprados).
 - **Edição de produtos:** Implementação de método para o Administrador realizar o ajuste manual de quantidades em estoque.
 
+### 💸 Controle de pagamento (PIX)
+- **Registro de vendas:** Captura de Nome, Categoria, Curso, Valor e Produto no momento da confirmação do PIX.
+- **Baixa automática:** Integração entre os módulos de Pagamento e Estoque, subtraindo a unidade vendida.
+- **Relatório de vendas:** Interface para o Administrador visualizar o histórico completo de transações realizadas.
+
 ## 📚 Tecnologias e conceitos aplicados
 - **Linguagem:** Python
 - **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para controle de fluxo robusto.
 - **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos (`.py`) para separação de responsabilidades entre as classes (Sistema, Usuário, Produto e Estoque).
 - **Estruturas de dados dinâmicas:** Uso de listas para armazenamento e manipulação de objetos complexos em tempo de execução.
 - **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
+- **Data e hora de transação:** Uso da biblioteca `datetime` para registrar data e hora exatas de cada venda.
 - **Controle de versão:** GitHub com commits incrementais e organizados.
 
 ---
-*Status do projeto: Em desenvolvimento (Identificação de usuários, gestão de estoque e vitrine de vendas concluídas).*
+*Status do projeto: Em desenvolvimento (Identificação de usuários, gestão de estoque, vendas e relatórios financeiros concluídas).*
