@@ -24,3 +24,11 @@ class GerenciarPagamentos:
         else:
             print('Pagamento não realizado.')
             return False
+        
+    def exibir_relatorio(self):
+        print('RELATÓRIO DE VENDAS (PIX)')
+        if self.historico_vendas: 
+            for v in self.historico_vendas:
+                print(f'Data: {v.data_hora}, \nCliente: {v.cliente}, {v.categoria}, {v.curso}, \nItem: {v.item}, \nValor: R$ {v.valor}')
+        else:
+            print('Nenhuma venda realizada até o momento.')

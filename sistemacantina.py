@@ -1,24 +1,23 @@
 from controleestoque import Produto, GerenciarEstoque
+from controlepagamento import Pagamento, GerenciarPagamentos
 
-# implementa a proteção da senha (Encapsulamento)
-class Sistema:
+class Sistema: # implementa a proteção da senha (Encapsulamento)
     def __init__(self):
         self.__senhacorreta = 'atletica26' # senha privada para segurança
 
     def validar_senha(self, digitada):
         return digitada == self.__senhacorreta
 
-# classe para guardar os dados de quem compra
-class Usuario:
+class Usuario: # classe para guardar os dados de quem compra
     def __init__(self, nome, categoria, curso='N/A'):
         self.nome = nome.capitalize()
         self.categoria = categoria
         self.curso = curso
 
-# implementa o painel administrativo/compras
-def rodar_programa():
+def rodar_programa(): # implementa o painel administrativo/compras
     sys = Sistema()
     estoque = GerenciarEstoque() # acesso à prateleira de produtos
+    financeiro = GerenciarPagamentos()
 
     while True:
         try: # garante que o usuario digite apenas 1 ou 2 e não quebre o codigo caso digite uma string
@@ -36,7 +35,7 @@ def rodar_programa():
                 print('Autenticação bem sucedida!')
 
                 while True: #permite cadastrar vários produtos seguidos, sem precisar precisar digitar a senha novamente
-                    print('MENU ADMINISTRADOR \n1 - Cadastrar produto, \n2 - Ver estoque, \n3 - Editar quantidade, \n0 - Sair do painel Admin')
+                    print('MENU ADMINISTRADOR \n1 - Cadastrar produto, \n2 - Ver estoque, \n3 - Editar quantidade, \n4 - Relatório de Vendas, \n0 - Sair do painel Admin')
                     
                     try:
                         op_admin = int(input('Escolha uma opção: '))
@@ -52,8 +51,7 @@ def rodar_programa():
                         data_compra = input('Data de compra: ')
                         data_vencimento = input('Data de vencimento: ')
 
-                        # cria o objeto produto e adiciona ao estoque
-                        novo_p = Produto(nome, preco_compra, preco_venda, quantidade, data_compra, data_vencimento)
+                        novo_p = Produto(nome, preco_compra, preco_venda, quantidade, data_compra, data_vencimento) # cria o objeto produto e adiciona ao estoque
                         estoque.adicionar_produto(novo_p)
 
                     elif op_admin == 2:
@@ -63,6 +61,9 @@ def rodar_programa():
                         nome_busca = input('Nome do produto a ser editado: ')
                         nova_qtd = input('Nova quantidade: ')
                         estoque.editar_quantidade(nome_busca, nova_qtd)
+
+                    elif op_admin == 4:
+                        financeiro.exibir_relatorio()
 
                     elif op_admin == 0:
                         break # Sai do menu admin e volta ao menu principal
@@ -103,22 +104,24 @@ def rodar_programa():
             
                 comprador = Usuario(nome, categoria, curso) # cria o objeto usuário
             
-                # mostra o resultado final
-                print(f'Bem-vindo, {comprador.nome}!, \nCategoria: {comprador.categoria}, \nCurso: {comprador.curso}')
+                print(f'Bem-vindo, {comprador.nome}!, \nCategoria: {comprador.categoria}, \nCurso: {comprador.curso}') # mostra o resultado final
 
                 print('PRODUTOS DISPONÍVEIS')
                 estoque.mostrar_estoque() 
 
                 escolha = input('Digite o nome do que deseja comprar: ').capitalize()
 
-                # busca o produto na lista do estoque
-                achou = False # variável de controle para verificar se o produto existe
+                achou = False # busca o produto na lista do estoque, variável de controle para verificar se o produto existe
                 for p in estoque.lista_produtos:
                     if p.nome == escolha:
                         achou = True # se achar
                         if p.quantidade > 0:
                             print(f'O produto {p.nome} custa R$ {p.preco_venda}')
-                            # o pagamento será chamado aqui
+
+                            novo_pagamento = Pagamento(comprador, p) # cria o objeto de pagamento com os dados do comprador e do produto
+                    
+                            if financeiro.processar_pix(novo_pagamento): # processa o PIX
+                                p.quantidade = p.quantidade - 1 # baixa automática (-1 unidade) no produto
                         else:
                             print(f'Desculpe, o produto {p.nome} está esgotado.')
                         break
@@ -133,5 +136,4 @@ def rodar_programa():
         else:
             print('Opção indisponível! Digite 1 para Admin ou 2 para Comprador')
 
-# inicia o programa
-rodar_programa()
+rodar_programa() # inicia o programa
