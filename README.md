@@ -26,6 +26,7 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Autenticação Segura:** Sistema de login com validação de senha (`atletica26`) e uso de atributos privados (Encapsulamento).
 - **Interface de gestão:** Menu interno que permite ao administrador navegar entre as funções de estoque sem necessidade de reautenticação.
 - **Proteção contra erros:** Uso de `try-except` para garantir que a navegação no menu não quebre com entradas inválidas.
+- **Automação de Preços:** Cálculo automático de margem de lucro (40%) para preço de venda.
 
 ### 🛒 Painel de Compras
 - **Identificação de clientes:** Coleta de dados por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
@@ -47,7 +48,7 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 ## 📚 Tecnologias e conceitos aplicados
 - **Linguagem:** Python
 - **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para controle de fluxo robusto.
-- **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos (`.py`) para separação de responsabilidades entre as classes (Sistema, Usuário, Produto e Estoque).
+- **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos, uso de atributos privados e métodos de acesso (Getters/Setters).
 - **Estruturas de dados dinâmicas:** Uso de listas para armazenamento e manipulação de objetos complexos em tempo de execução.
 - **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
 - **Data e hora de transação:** Uso da biblioteca `datetime` para registrar data e hora exatas de cada venda.
