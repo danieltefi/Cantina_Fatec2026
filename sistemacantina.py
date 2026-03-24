@@ -10,9 +10,13 @@ class Sistema: # implementa a proteção da senha (Encapsulamento)
 
 class Usuario: # classe para guardar os dados de quem compra
     def __init__(self, nome, categoria, curso='N/A'):
-        self.nome = nome.capitalize()
-        self.categoria = categoria
-        self.curso = curso
+        self.__nome = nome.capitalize()
+        self.__categoria = categoria
+        self.__curso = curso
+
+    def get_nome(self): return self.__nome # permitir a leitura dos dados
+    def get_categoria(self): return self.__categoria
+    def get_curso(self): return self.__curso
 
 def rodar_programa(): # implementa o painel administrativo/compras
     sys = Sistema()
@@ -46,12 +50,11 @@ def rodar_programa(): # implementa o painel administrativo/compras
                     if op_admin == 1:
                         nome = input('Nome do produto: ')
                         preco_compra = input('Preço de compra: ')
-                        preco_venda = input('Preço de venda: ')
                         quantidade = input('Quantidade: ')
                         data_compra = input('Data de compra: ')
                         data_vencimento = input('Data de vencimento: ')
 
-                        novo_p = Produto(nome, preco_compra, preco_venda, quantidade, data_compra, data_vencimento) # cria o objeto produto e adiciona ao estoque
+                        novo_p = Produto(nome, preco_compra, quantidade, data_compra, data_vencimento) # cria o objeto produto e adiciona ao estoque
                         estoque.adicionar_produto(novo_p)
 
                     elif op_admin == 2:
@@ -104,7 +107,7 @@ def rodar_programa(): # implementa o painel administrativo/compras
             
                 comprador = Usuario(nome, categoria, curso) # cria o objeto usuário
             
-                print(f'Bem-vindo, {comprador.nome}!, \nCategoria: {comprador.categoria}, \nCurso: {comprador.curso}') # mostra o resultado final
+                print(f'Bem-vindo, {comprador.get_nome()}!, \nCategoria: {comprador.get_categoria()}, \nCurso: {comprador.get_curso()}') # mostra o resultado final
 
                 print('PRODUTOS DISPONÍVEIS')
                 estoque.mostrar_estoque() 
@@ -113,17 +116,18 @@ def rodar_programa(): # implementa o painel administrativo/compras
 
                 achou = False # busca o produto na lista do estoque, variável de controle para verificar se o produto existe
                 for p in estoque.lista_produtos:
-                    if p.nome == escolha:
+                    if p.get_nome() == escolha:
                         achou = True # se achar
-                        if p.quantidade > 0:
-                            print(f'O produto {p.nome} custa R$ {p.preco_venda}')
+                        if p.get_quantidade() > 0:
+                            print(f'O produto {p.get_nome()} custa R$ {p.get_preco_venda()}')
 
                             novo_pagamento = Pagamento(comprador, p) # cria o objeto de pagamento com os dados do comprador e do produto
                     
                             if financeiro.processar_pix(novo_pagamento): # processa o PIX
-                                p.quantidade = p.quantidade - 1 # baixa automática (-1 unidade) no produto
+                                nova_qtd = p.get_quantidade() - 1 # baixa automática (-1 unidade) no produto
+                                p.set_quantidade(nova_qtd)
                         else:
-                            print(f'Desculpe, o produto {p.nome} está esgotado.')
+                            print(f'Desculpe, o produto {p.get_nome()} está esgotado.')
                         break
                 
                 if not achou: # se não achar
