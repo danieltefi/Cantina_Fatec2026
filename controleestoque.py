@@ -1,3 +1,5 @@
+from estruturasdados import FilaEstoque
+
 class Produto: # classe para gerenciar produtos
     def __init__(self, nome, preco_compra, quantidade, data_compra, data_vencimento):
         self.__nome = nome.capitalize()
@@ -31,24 +33,25 @@ class Produto: # classe para gerenciar produtos
 
 class GerenciarEstoque: # gerenciar estoque total
     def __init__(self): # o primeiro da lista (índice 0) será sempre o mais velho
-        self.lista_produtos = []
+        self.lista_produtos = FilaEstoque()
 
     def adicionar_produto(self, produto):
-        self.lista_produtos.append(produto)
+        self.lista_produtos.entrar(produto)
         print(f'Produto {produto.get_nome()} adicionado com sucesso!')
 
     def mostrar_estoque(self):
-        if not self.lista_produtos:
+        produtos = self.lista_produtos.get_todos()
+        if not produtos:
             print('Sem produtos em estoque!')
             return
 
         print('Estoque de produtos')
-        for p in self.lista_produtos:
+        for p in produtos:
             print(f'Produto: {p.get_nome()}, \nQtd: {p.get_quantidade()}, \nCompra: {p.get_data_compra()}, \nVencimento: {p.get_data_vencimento()}')
 
     def editar_quantidade(self, nome_busca, nova_qtd): # permite editar a quantidade
         encontrado = False # variável de controle para verificar se o produto existe
-        for p in self.lista_produtos:
+        for p in self.lista_produtos.get_todos():
             if p.get_nome() == nome_busca.capitalize():
                 p.set_quantidade(int(nova_qtd))
                 encontrado = True # se achar

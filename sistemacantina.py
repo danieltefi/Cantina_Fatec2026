@@ -115,7 +115,7 @@ def rodar_programa(): # implementa o painel administrativo/compras
                 escolha = input('Digite o nome do que deseja comprar: ').capitalize()
 
                 achou = False # busca o produto na lista do estoque, variável de controle para verificar se o produto existe
-                for p in estoque.lista_produtos:
+                for p in estoque.lista_produtos.get_todos():
                     if p.get_nome() == escolha:
                         achou = True # se achar
                         if p.get_quantidade() > 0:

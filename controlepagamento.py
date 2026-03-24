@@ -1,4 +1,5 @@
 from datetime import datetime
+from estruturasdados import ListaVendas
 
 class Pagamento:
     def __init__(self, comprador, produto):
@@ -18,14 +19,14 @@ class Pagamento:
 
 class GerenciarPagamentos:
     def __init__(self):
-        self.historico_vendas = []
+        self.historico_vendas = ListaVendas()
 
     def processar_pix(self, pagamento):
         print(f'PAGAMENTO PIX \nValor: R$ {pagamento.get_valor()}')
         confirmar = input("PIX foi enviado? (S/N): ").upper()
         
         if confirmar == 'S':
-            self.historico_vendas.append(pagamento)
+            self.historico_vendas.registrar(pagamento)
             print(f'Venda registrada com sucesso em: {pagamento.get_data_hora()}')
             return True
         else:
@@ -34,8 +35,9 @@ class GerenciarPagamentos:
         
     def exibir_relatorio(self): # exibe o relatório de vendas
         print('RELATÓRIO DE VENDAS (PIX)')
-        if self.historico_vendas: 
-            for v in self.historico_vendas:
+        vendas = self.historico_vendas.get_todas()
+        if not self.historico_vendas.vazia(): 
+            for v in vendas:
                 print(f'Data: {v.get_data_hora()}, \nCliente: {v.get_cliente()}, {v.get_categoria()}, {v.get_curso()}, \nItem: {v.get_item()}, \nValor: R$ {v.get_valor()}')
         else:
             print('Nenhuma venda realizada até o momento.')
