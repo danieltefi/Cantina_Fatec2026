@@ -49,7 +49,7 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 - **Linguagem:** Python
 - **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para controle de fluxo robusto.
 - **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos, uso de atributos privados e métodos de acesso (Getters/Setters).
-- **Estruturas de dados dinâmicas:** Uso de listas para armazenamento e manipulação de objetos complexos em tempo de execução.
+- **Estruturas de dados personalizadas:** Uso de listas encapsuladas para evitar estruturas built-in.
 - **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
 - **Data e hora de transação:** Uso da biblioteca `datetime` para registrar data e hora exatas de cada venda.
 - **Controle de versão:** GitHub com commits incrementais e organizados.
