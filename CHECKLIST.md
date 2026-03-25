@@ -10,9 +10,9 @@
 - [x] **Simulação de consumo:**
     - [x] Realizar a baixa automática do estoque no momento da compra.
     - [x] Vincular o registro de pagamento ao consumo e ao produto.
-- [ ] **Geração e persistência de dados:**
-    - [ ] Popular o sistema com dados aleatórios usando a biblioteca Faker.
-    - [ ] Implementar salvamento e carregamento não volátil via pickle.
+- [x] **Geração e persistência de dados:**
+    - [x] Popular o sistema com dados aleatórios usando a biblioteca Faker.
+    - [x] Implementar salvamento e carregamento não volátil via pickle.
 - [x] **Relatórios:**
     - [x] Criar relatórios de vendas e relatórios de consumo.
 
@@ -22,10 +22,10 @@
 - [x] **Separação de responsabilidades:** Divisão clara de funções entre as classes.
 
 ## ⚠️ Critérios de avaliação e prazos
-- [ ] **Entregas incrementais:** Realizar commits frequentes no GitHub.
+- [x] **Entregas incrementais:** Realizar commits frequentes no GitHub.
 - [ ] **Domínio do código:** Estar apto a explicar as escolhas técnicas na apresentação.
 - [ ] **Data Final:** Entrega e apresentação em 26/03/2026.
 
 ## 🚫 NÃO fazer
-- [ ] **NÃO usar bibliotecas built-in de forma direta:** Proibido usar listas, pilhas ou filas do Python para lidar com a lógica do problema fora de classes próprias.
-- [ ] **NÃO ignorar o Encapsulamento:** Garantir que as estruturas internas não estejam expostas sem proteção.
+- [x] **NÃO usar bibliotecas built-in de forma direta:** Proibido usar listas, pilhas ou filas do Python para lidar com a lógica do problema fora de classes próprias.
+- [x] **NÃO ignorar o Encapsulamento:** Garantir que as estruturas internas não estejam expostas sem proteção.
