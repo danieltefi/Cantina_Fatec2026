@@ -2,11 +2,17 @@ from controleestoque import Produto, GerenciarEstoque
 from controlepagamento import GerenciarPagamentos
 from carrinho import Carrinho
 from usuarios import Sistema, Usuario
+from faker import Faker
 
 def rodar_programa(): # implementa o painel administrativo/compras
     sys = Sistema()
     estoque = GerenciarEstoque() # acesso à prateleira de produtos
+    estoque.carregar_dados() # tenta carregar dados salvos anteriormente
+    if not estoque.lista_produtos.get_todos(): # se estiver vazio
+        print('Estoque vazio. Gerando dados iniciais automaticamente...')
+        popular_estoque_faker(estoque) # gera os dados automaticamente
     financeiro = GerenciarPagamentos()
+    financeiro.carregar_dados() # carrega as vendas do arquivo 'vendas.dat'
 
     while True:
         try: # garante que o usuario digite apenas 1 ou 2 e não quebre o codigo caso digite uma string
@@ -41,6 +47,7 @@ def rodar_programa(): # implementa o painel administrativo/compras
 
                         novo_p = Produto(nome, preco_compra, quantidade, data_compra, data_vencimento) # cria o objeto produto e adiciona ao estoque
                         estoque.adicionar_produto(novo_p)
+                        estoque.salvar_dados() # salva os dados no arquivo
 
                     elif op_admin == 2:
                         estoque.mostrar_estoque()
@@ -49,6 +56,7 @@ def rodar_programa(): # implementa o painel administrativo/compras
                         nome_busca = input('Nome do produto a ser editado: ')
                         nova_qtd = input('Nova quantidade: ')
                         estoque.editar_quantidade(nome_busca, nova_qtd)
+                        estoque.salvar_dados() # salva os dados no arquivo
 
                     elif op_admin == 4:
                         financeiro.exibir_relatorio()
@@ -144,3 +152,17 @@ def rodar_programa(): # implementa o painel administrativo/compras
             print('Opção indisponível! Digite 1 para Admin ou 2 para Comprador')
 
 rodar_programa() # inicia o programa
+
+def popular_estoque_faker(gerente_estoque): # geração de dados aleatórios 
+    fake = Faker('pt_BR')
+    for _ in range(5): # gera 5 produtos de exemplo
+        nome = fake.word().capitalize()
+        preco_c = round(fake.pyfloat(left_digits=2, right_digits=2, min_value=1.0, max_value=10.0), 2)
+        qtd = fake.random_int(min=5, max=20)
+        data_c = "25/03/2026"
+        data_v = "01/12/2026"
+        
+        novo_p = Produto(nome, str(preco_c), qtd, data_c, data_v)
+        gerente_estoque.adicionar_produto(novo_p)
+    gerente_estoque.salvar_dados() # salva os dados gerados 
+    print('Estoque gerado com sucesso via Faker!')

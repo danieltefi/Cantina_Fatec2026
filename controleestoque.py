@@ -1,4 +1,5 @@
 from estruturasdados import FilaEstoque
+import pickle
 
 class Produto: # classe para gerenciar produtos
     def __init__(self, nome, preco_compra, quantidade, data_compra, data_vencimento):
@@ -59,3 +60,14 @@ class GerenciarEstoque: # gerenciar estoque total
                 break
         if not encontrado: # se não achar
             print('Produto não encontrado para edição.')
+
+    def salvar_dados(self): # salvamento de dados (pickle)
+        with open('estoque.dat', 'wb') as f:
+            pickle.dump(self.lista_produtos, f)
+
+    def carregar_dados(self): # carrega os dados (pickle)
+        try:
+            with open('estoque.dat', 'rb') as f:
+                self.lista_produtos = pickle.load(f)
+        except (FileNotFoundError, EOFError):
+            pass # se não existir o arquivo, ignora

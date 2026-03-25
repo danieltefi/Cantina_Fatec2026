@@ -1,6 +1,7 @@
 from datetime import datetime
 from estruturasdados import ListaVendas
 from carrinho import Carrinho
+import pickle
 
 class Pagamento:
     def __init__(self, comprador, produto):
@@ -55,3 +56,17 @@ class GerenciarPagamentos:
 
             nova_qtd = int(produto.get_quantidade()) - quantidade # o que tem no estoque - o que esta levando e atualiza no estoque
             produto.set_quantidade(nova_qtd)
+        
+        self.salvar_dados() # salva os dados logo após processar a venda
+
+    def salvar_dados(self): # salva o histórico em arquivo 
+        with open('vendas.dat', 'wb') as f:
+            pickle.dump(self.historico_vendas, f)
+
+    def carregar_dados(self): # carrega as vendas salvas anteriormente
+        try:
+            with open('vendas.dat', 'rb') as f:
+                self.historico_vendas = pickle.load(f)
+        except (FileNotFoundError, EOFError):
+            pass # se o arquivo não existir, inicia com histórico vazio
+
