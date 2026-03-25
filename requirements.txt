@@ -1,3 +1,4 @@
 # Instruções projeto Cantina FATEC 2026
 
-# Até o momento o projeto utiliza apenas a biblioteca padrao do Python.
+# Bibliotecas necessárias para o Projeto Cantina FATEC 2026
+faker==33.3.1
