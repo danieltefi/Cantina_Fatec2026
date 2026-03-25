@@ -33,7 +33,10 @@ class GerenciarPagamentos:
         vendas = self.historico_vendas.get_todas()
         if not self.historico_vendas.vazia(): 
             for v in vendas:
-                print(f'Data: {v.get_data_hora()}, \nCliente: {v.get_cliente()}, {v.get_categoria()}, {v.get_curso()}, \nItem: {v.get_item()}, \nValor: R$ {v.get_valor()}')
+                print(f'Data: {v.get_data_hora()}')
+                print(f'Cliente: {v.get_cliente()}, Categoria: {v.get_categoria()}, Curso: {v.get_curso()}')
+                print(f'Item: {v.get_item()}')
+                print(f'Valor: R$ {v.get_valor():.2f}') # 2f arredonda para 2 casas decimais
         else:
             print('Nenhuma venda realizada até o momento.')
 

@@ -3,7 +3,7 @@ from estruturasdados import FilaEstoque
 class Produto: # classe para gerenciar produtos
     def __init__(self, nome, preco_compra, quantidade, data_compra, data_vencimento):
         self.__nome = nome.capitalize()
-        self.__preco_compra = float(preco_compra)
+        self.__preco_compra = float(preco_compra.replace(',', '.')) # replace aceita , para substituir por .
         self.__preco_venda = round(self.__preco_compra * 1.40, 2) # margem de lucro de 40%, round arredonda para duas classes decimais
         self.__quantidade = int(quantidade)
         self.__data_compra = data_compra
