@@ -1,5 +1,6 @@
 from estruturasdados import FilaEstoque
 import pickle
+from faker import Faker
 
 class Produto: # classe para gerenciar produtos
     def __init__(self, nome, preco_compra, quantidade, data_compra, data_vencimento):
@@ -71,3 +72,25 @@ class GerenciarEstoque: # gerenciar estoque total
                 self.lista_produtos = pickle.load(f)
         except (FileNotFoundError, EOFError):
             pass # se não existir o arquivo, ignora
+
+    def popular_estoque_faker(self):
+        fake = Faker('pt_BR')
+        produtos_disponiveis = [
+            'Coxinha de Frango', 'Kibe com Requeijão', 'Pão de Queijo', 
+            'Enroladinho', 'Pastel de Carne', 'Sanduíche Natural',
+            'Coca-Cola Lata', 'Suco de Laranja', 'Água Mineral',
+            'Barra de Chocolate', 'Trident Hortelã'
+        ]
+        
+        for _ in range(5):
+            nome = fake.random_element(elements=produtos_disponiveis)
+            preco_c = round(fake.pyfloat(left_digits=2, right_digits=2, min_value=2.0, max_value=8.0), 2)
+            qtd = fake.random_int(min=5, max=20)
+            data_c = "25/03/2026"
+            data_v = "20/12/2026"
+
+            novo_p = Produto(nome, str(preco_c), qtd, data_c, data_v)
+            self.adicionar_produto(novo_p)
+            
+        self.salvar_dados()
+        print('Estoque inicial gerado com sucesso!')
