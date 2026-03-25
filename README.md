@@ -1,57 +1,47 @@
 # 🐓🤖 Sistema de gestão - Cantina FATEC 2026
-Projeto Cantina Atlética
 
-Este repositório contém o desenvolvimento do projeto prático para as disciplinas de **Linguagem de programação 2** e **estrutura de dados**. O objetivo é gerenciar o estoque e as vendas de uma cantina utilizando conceitos de POO (Programação Orientada a Objetos) e Estruturas de Dados Dinâmicas.
+Projeto prático para as disciplinas de **Linguagem de Programação 2** e **Estrutura de Dados**. 
+O sistema foca em Programação Orientada a Objetos e estruturas dinâmicas para gestão de estoque e vendas.
 
 ## ⚙️ Configuração do ambiente
+O projeto utiliza **ambiente virtual (venv)** para isolamento de dependências.
 
-Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências e garantir que o sistema rode com as versões corretas das bibliotecas.
+### Instalação:
+1. **Ative o ambiente:**
+   - Windows (PowerShell): `.\venv\Scripts\Activate.ps1`
+   - Windows (CMD): `.\venv\Scripts\activate.bat`
+   - Linux/macOS: `source venv/bin/activate`
+2. **Dependências:** `pip install -r requirements.txt` (Necessário para a biblioteca **Faker**).
 
-### Como configurar o ambiente de desenvolvimento:
+### Execução:
+- Com o venv ativo: `python sistemacantina.py`
 
-1. **Clone o repositório e abra o terminal na pasta do projeto.**
-2. **Ative o ambiente virtual:**
-   - **No Windows (PowerShell):** `.\venv\Scripts\Activate.ps1`
-   - **No Windows (CMD):** `.\venv\Scripts\activate.bat`
-   - **No Linux/macOS:** `source venv/bin/activate`
-3. **Instale as dependências:**
-   - `pip install -r requirements.txt`
+## 🛠️ Funcionalidades concluídas
 
-### Como rodar o projeto:
-- Certifique-se de que o venv está ativo e execute: `python sistemacantina.py`
+### 🔐 Painel administrativo
+- **Autenticação:** Acesso via senha privada com atributos encapsulados.
+- **Gestão de margem:** Cálculo automático de lucro sobre o preço de compra.
+- **Persistência:** Carregamento e salvamento automático de dados via **Pickle**.
 
-## 🛠️ Funcionalidades atuais
+### 🛒 Painel de compras
+- **Triagem de usuários:** Coleta de Nome, Categoria (Aluno, Servidor, Professor) e Curso (IA/ESG).
+- **Carrinho dinâmico:** Seleção de múltiplos itens com validação de estoque em tempo real.
+- **Simulação de venda:** Fluxo de checkout integrado para confirmação de pagamento via PIX.
 
-### 🔐 Painel Administrativo
-- **Autenticação Segura:** Sistema de login com validação de senha (`atletica26`) e uso de atributos privados (Encapsulamento).
-- **Interface de gestão:** Menu interno que permite ao administrador navegar entre as funções de estoque sem necessidade de reautenticação.
-- **Automação de Preços:** Cálculo automático de margem de lucro (40%) para preço de venda.
+### 📦 Gestão de estoque
+- **FIFO (First-In, First-Out):** Estrutura que prioriza a saída de itens mais antigos.
+- **Controle manual:** Permite ao administrador editar quantidades diretamente no estoque.
 
-### 🛒 Painel de Compras
-- **Identificação de clientes:** Coleta de dados por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
-- **Fluxo inteligente:** A pergunta sobre o "Curso" é exibida exclusivamente para usuários da categoria "Aluno".
-- **Vitrine de produtos:** Visualização dos produtos cadastrados no estoque.
-- **Busca por produto:** Lógica de busca que valida se o produto escolhido existe e se possui quantidade disponível para venda.
-- **Carrinho de compra:** Implementação da classe Carrinho que permite ao usuário adicionar itens e quantidades para compra.
+### 💸 Relatórios e consumo
+- **Baixa automática:** Sincronização entre venda e estoque por unidade consumida.
+- **Histórico completo:** Relatório detalhado de consumo, incluindo data e hora exata.
 
-### 📦 Gestão de Estoque
-- **Cadastro de produtos:** Cadastro contendo Nome, Preço de compra/venda, Quantidade e Datas (Compra/Vencimento).
-- **Lógica FIFO (First-In, First-Out):** Estrutura que prioriza a venda dos itens mais velhos (primeiros comprados).
-- **Edição de produtos:** Implementação de método para o Administrador realizar o ajuste manual de quantidades em estoque.
-
-### 💸 Controle de pagamento (PIX)
-- **Registro de vendas:** Captura de Nome, Categoria, Curso, Valor e Produto no momento da confirmação do PIX.
-- **Baixa automática:** Integração entre os módulos de Pagamento e Estoque, subtraindo a unidade vendida.
-- **Relatório de vendas:** Interface para o Administrador visualizar o histórico completo de transações realizadas.
-
-## 📚 Tecnologias e conceitos aplicados
-- **Linguagem:** Python
-- **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para tratar erros.
-- **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos, uso de atributos privados e métodos de acesso (Getters/Setters).
-- **Estruturas de dados personalizadas:** Uso de listas encapsuladas para evitar estruturas built-in.
-- **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
-- **Data e hora de transação:** Uso da biblioteca `datetime` para registrar data e hora exatas de cada venda.
-- **Controle de versão:** GitHub com commits incrementais e organizados.
+## 📚 Tecnologias e conceitos
+- **Linguagem:** Python 3.
+- **Estruturas próprias:** Implementação de fila e lista encapsuladas, evitando o uso direto de built-ins.
+- **Persistência de dados:** Armazenamento não volátil em arquivos binários (`.dat`) com **Pickle**.
+- **Tratamento de erros:** Blocos `try-except` para validar entradas e formatação de preços.
+- **Modularização:** Divisão do sistema em múltiplos arquivos para separação de responsabilidades.
 
 ---
-*Status do projeto: Em desenvolvimento (Identificação de usuários, gestão de estoque, vendas e relatórios financeiros concluídas).*
+*Status do projeto: **Concluído** (Requisitos de estoque, vendas, relatórios e persistência de dados).*
