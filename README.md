@@ -25,15 +25,14 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 ### 🔐 Painel Administrativo
 - **Autenticação Segura:** Sistema de login com validação de senha (`atletica26`) e uso de atributos privados (Encapsulamento).
 - **Interface de gestão:** Menu interno que permite ao administrador navegar entre as funções de estoque sem necessidade de reautenticação.
-- **Proteção contra erros:** Uso de `try-except` para garantir que a navegação no menu não quebre com entradas inválidas.
 - **Automação de Preços:** Cálculo automático de margem de lucro (40%) para preço de venda.
 
 ### 🛒 Painel de Compras
 - **Identificação de clientes:** Coleta de dados por **Nome**, **Categoria** (Aluno, Servidor, Professor) e **Curso** (IA ou ESG).
-- **Validação de dados:** Implementação de `try-except` para capturar `ValueError`, garantindo que o sistema não encerre ao receber letras em campos numéricos ou números decimais.
 - **Fluxo inteligente:** A pergunta sobre o "Curso" é exibida exclusivamente para usuários da categoria "Aluno".
 - **Vitrine de produtos:** Visualização dos produtos cadastrados no estoque.
 - **Busca por produto:** Lógica de busca que valida se o produto escolhido existe e se possui quantidade disponível para venda.
+- **Carrinho de compra:** Implementação da classe Carrinho que permite ao usuário adicionar itens e quantidades para compra.
 
 ### 📦 Gestão de Estoque
 - **Cadastro de produtos:** Cadastro contendo Nome, Preço de compra/venda, Quantidade e Datas (Compra/Vencimento).
@@ -47,7 +46,7 @@ Este projeto utiliza um **ambiente virtual (venv)** para isolar as dependências
 
 ## 📚 Tecnologias e conceitos aplicados
 - **Linguagem:** Python
-- **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para controle de fluxo robusto.
+- **Tratamento de exceções:** Uso de `try`, `except`, `continue` e `break` para tratar erros.
 - **Modularização e Encapsulamento:** Organização do sistema em múltiplos arquivos, uso de atributos privados e métodos de acesso (Getters/Setters).
 - **Estruturas de dados personalizadas:** Uso de listas encapsuladas para evitar estruturas built-in.
 - **Tipagem de dados:** Conversão explícita para `float` e `int`, assegurando a integridade de cálculos financeiros e contagem de itens.
