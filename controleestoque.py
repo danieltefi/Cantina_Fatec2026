@@ -21,7 +21,7 @@ class Produto: # classe para gerenciar produtos
     def get_quantidade(self):
         return self.__quantidade
 
-    def set_quantidade(self, nova_qtd):
+    def set_quantidade(self, nova_qtd): #atualiza o estoque após venda
         if nova_qtd >= 0:
             self.__quantidade = nova_qtd
 

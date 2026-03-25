@@ -1,5 +1,6 @@
 from controleestoque import Produto, GerenciarEstoque
-from controlepagamento import Pagamento, GerenciarPagamentos
+from controlepagamento import GerenciarPagamentos
+from carrinho import Carrinho
 
 class Sistema: # implementa a proteção da senha (Encapsulamento)
     def __init__(self):
@@ -14,9 +15,12 @@ class Usuario: # classe para guardar os dados de quem compra
         self.__categoria = categoria
         self.__curso = curso
 
-    def get_nome(self): return self.__nome # permitir a leitura dos dados
-    def get_categoria(self): return self.__categoria
-    def get_curso(self): return self.__curso
+    def get_nome(self): 
+        return self.__nome # permitir a leitura dos dados
+    def get_categoria(self): 
+        return self.__categoria
+    def get_curso(self): 
+        return self.__curso
 
 def rodar_programa(): # implementa o painel administrativo/compras
     sys = Sistema()
@@ -106,32 +110,50 @@ def rodar_programa(): # implementa o painel administrativo/compras
                         continue
             
                 comprador = Usuario(nome, categoria, curso) # cria o objeto usuário
+                meu_carrinho = Carrinho() # cria um carrinho para o usuário
             
                 print(f'Bem-vindo, {comprador.get_nome()}!, \nCategoria: {comprador.get_categoria()}, \nCurso: {comprador.get_curso()}') # mostra o resultado final
 
-                print('PRODUTOS DISPONÍVEIS')
-                estoque.mostrar_estoque() 
+                while True:
+                    print('PRODUTOS DISPONÍVEIS')
+                    estoque.mostrar_estoque() 
 
-                escolha = input('Digite o nome do que deseja comprar: ').capitalize()
+                    escolha = input('Digite o nome do produto, "Fim" para pagar ou "Sair" para cancelar: ').capitalize()
 
-                achou = False # busca o produto na lista do estoque, variável de controle para verificar se o produto existe
-                for p in estoque.lista_produtos.get_todos():
-                    if p.get_nome() == escolha:
-                        achou = True # se achar
-                        if p.get_quantidade() > 0:
-                            print(f'O produto {p.get_nome()} custa R$ {p.get_preco_venda()}')
-
-                            novo_pagamento = Pagamento(comprador, p) # cria o objeto de pagamento com os dados do comprador e do produto
-                    
-                            if financeiro.processar_pix(novo_pagamento): # processa o PIX
-                                nova_qtd = p.get_quantidade() - 1 # baixa automática (-1 unidade) no produto
-                                p.set_quantidade(nova_qtd)
-                        else:
-                            print(f'Desculpe, o produto {p.get_nome()} está esgotado.')
+                    if escolha == 'Sair':
+                        meu_carrinho.limpar()
                         break
-                
-                if not achou: # se não achar
-                    print('Produto não encontrado.')
+
+                    if escolha == 'Fim':
+                        if meu_carrinho.get_total() > 0:
+                            financeiro.processar_venda_carrinho(comprador, meu_carrinho) # chama o metodo (mostra total, registra e baixa estoque)
+                            
+                            print('Compra finalizada com sucesso!')
+                            break
+                        else:
+                            print('Carrinho vazio!')
+                            continue
+
+                    achou = False 
+                    for p in estoque.lista_produtos.get_todos():
+                        if p.get_nome() == escolha:
+                            achou = True 
+                            if p.get_quantidade() > 0:
+                                try:
+                                    qtd_desejada = int(input(f'Quantidade de {p.get_nome()} em número: '))
+                                    if 0 < qtd_desejada <= p.get_quantidade(): # se a quantidade requerida é maior que zero e menor do que a quantidade em estoque
+                                        meu_carrinho.adicionar(p, qtd_desejada) # adiciona ao carrinho
+                                        print(f'{qtd_desejada}x {p.get_nome()} adicionado ao carrinho.')
+                                    else:
+                                        print('Quantidade indisponível.')
+                                except ValueError:
+                                    print('Digite um número inteiro para a quantidade.')
+                            else:
+                                print(f'Desculpe, o produto {p.get_nome()} está esgotado.')
+                            break
+                    
+                    if not achou:
+                        print('Produto não encontrado.')
 
             except ValueError:
                 print('Erro: Digite apenas os números das opções!')
