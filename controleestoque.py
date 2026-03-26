@@ -49,7 +49,7 @@ class GerenciarEstoque: # gerenciar estoque total
 
         print('Estoque de produtos')
         for p in produtos:
-            print(f'Produto: {p.get_nome()}, \nQtd: {p.get_quantidade()}, \nCompra: {p.get_data_compra()}, \nVencimento: {p.get_data_vencimento()}')
+            print(f'Produto: {p.get_nome()}, \nQtd: {p.get_quantidade()}, \nPreço: R$ {p.get_preco_venda():.2f}')
 
     def editar_quantidade(self, nome_busca, nova_qtd): # permite editar a quantidade
         encontrado = False # variável de controle para verificar se o produto existe
@@ -83,9 +83,9 @@ class GerenciarEstoque: # gerenciar estoque total
         ]
         
         for _ in range(5):
-            nome = fake.random_element(elements=produtos_disponiveis)
-            preco_c = round(fake.pyfloat(left_digits=2, right_digits=2, min_value=2.0, max_value=8.0), 2)
-            qtd = fake.random_int(min=5, max=20)
+            nome = fake.random_element(elements=produtos_disponiveis) # pega 5 produtos de forma random da lista
+            preco_c = round(fake.pyfloat(left_digits=2, right_digits=2, min_value=2.0, max_value=8.0), 2) # define o preço ter 2 digitos antes e depois, no min 2 reais e max 8
+            qtd = fake.random_int(min=5, max=20) # quantidade de 5 a 8
             data_c = "25/03/2026"
             data_v = "20/12/2026"
 
